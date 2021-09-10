@@ -8,4 +8,6 @@ blogCatRouter.get('/blogs/categories/:catId', BlogCat.getSingleCategory)
 
 blogCatRouter.post('/blogs/categories/add', BlogCat.addCategory)
 
+blogCatRouter.put('/blogs/categories/:id', BlogCat.updateCategory)
+
 module.exports = blogCatRouter

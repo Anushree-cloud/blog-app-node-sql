@@ -40,7 +40,7 @@ const save = (newData, callback) => {
 
 //update category
 const updateById = (updatedData, blogCatId, callback) => {
-    let sqlQuery = `UPDATE blog_categories SET name=${updatedData.name} WHERE id=${blogCatId}`
+    let sqlQuery = `UPDATE blog_categories SET name='${updatedData.name}' WHERE id=${blogCatId}`
     db.query(sqlQuery, (error, blogCat) => {
         if(error) throw error
         callback(blogCat)

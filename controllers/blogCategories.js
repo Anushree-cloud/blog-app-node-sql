@@ -24,7 +24,6 @@ exports.getSingleCategory = (req, res) => {
 }
 
 exports.addCategory = (req, res) => {
-    console.log(req.body);
     let newData = {
         name: req.body.name
     }
@@ -34,6 +33,23 @@ exports.addCategory = (req, res) => {
                 message: 'New Blog-Category Added..!',
                 category: newData
             }
+        })
+    })
+}
+
+exports.updateCategory = (req, res) => {
+    let id = req.params.catId
+    BlogCat.getById(id, (catagory) => {
+        let updatedData = {
+            name: req.body.name ? req.body.name : catagory.name 
+        }
+        BlogCat.updateById(updatedData, id, (blogCat) => {
+            res.json({
+                data: {
+                    message: `Blog Updated with id=${id}`,
+                    category: blogCat
+                }
+            })
         })
     })
 }

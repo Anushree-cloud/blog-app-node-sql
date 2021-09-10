@@ -4,10 +4,10 @@ const blogCatRouter = require('./routers/blogCategories')
 
 const app = express()
 
-app.use(blogCatRouter)
-
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+app.use(blogCatRouter)
 
 const PORT = process.env.PORT || 8080
 
