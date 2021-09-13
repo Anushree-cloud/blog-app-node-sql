@@ -60,7 +60,7 @@ const getBlogDetails = (callback) => {
     blogs.description 
     FROM blogs
     INNER JOIN users ON blogs.user_id = users.id
-    INNER JOIN blogs.category_id = blog_categories.id `
+    INNER JOIN blog_categories ON blogs.category_id = blog_categories.id `
 
     db.query(sqlQuery, (error, details) => {
         if(error) throw error

@@ -75,16 +75,16 @@ exports.getAllBlogsByCategoryId = (req, res) => {
     })
 }
 
-// exports.getAllBlogDetails = (req, res) => {
-//     Blogs.getBlogDetails((blogs) => {
-//         res.json({
-//             data: {
-//                 message: 'All Blogs fetched with Details..!',
-//                 data: blogs
-//             }    
-//         })
-//     })
-// }
+exports.getAllBlogDetails = (req, res) => {
+    Blogs.getBlogDetails((blogs) => {
+        res.json({
+            data: {
+                message: 'All Blogs fetched with Details..!',
+                data: blogs
+            }    
+        })
+    })
+}
 
 exports.addBlog = (req, res) => {
     let newblog = {

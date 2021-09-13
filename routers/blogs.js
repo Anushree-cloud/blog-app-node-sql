@@ -9,7 +9,7 @@ blogRouter.get('/blogs/blogUsers/:userId', Blog.getAllBlogsByUserId) // all by u
 
 blogRouter.get('/blogs/blogCategories/:catId', Blog.getAllBlogsByCategoryId) //all by category id
 
-// blogRouter.get('/blogs/blogDetails', Blog.getAllBlogDetails) //all with details
+blogRouter.get('/blogs/blogDetails', Blog.getAllBlogDetails) //all with details
 
 blogRouter.post('/blogs', Blog.addBlog)
 
