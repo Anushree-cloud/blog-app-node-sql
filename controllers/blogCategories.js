@@ -5,7 +5,7 @@ exports.getAllCategories = (req, res) => {
         res.json({
             data: {
                 message: 'All Categories Fetched..!',
-                categories: categories
+                data: categories
             }
         })
     })
@@ -17,7 +17,7 @@ exports.getSingleCategory = (req, res) => {
         res.json({
             data: {
                 message: `Category fetched with id: ${id}`,
-                category: category
+                data: category
             }
         })
     })
@@ -31,7 +31,7 @@ exports.addCategory = (req, res) => {
         res.json({
             data: {
                 message: 'New Blog-Category Added..!',
-                category: newData
+                data: newData
             }
         })
     })
@@ -41,15 +41,25 @@ exports.updateCategory = (req, res) => {
     let id = req.params.catId
     BlogCat.getById(id, (catagory) => {
         let updatedData = {
+            id: catagory.id,
             name: req.body.name ? req.body.name : catagory.name 
         }
-        BlogCat.updateById(updatedData, id, (blogCat) => {
+        BlogCat.updateById(updatedData, id, () => {
             res.json({
                 data: {
                     message: `Blog Updated with id=${id}`,
-                    category: blogCat
+                    data: updatedData
                 }
             })
+        })
+    })
+}
+
+exports.deleteCategory = (req, res) => {
+    let id = req.params.catId
+    BlogCat.deleteById(id, () => {
+        res.json({
+            message: `Blog Deleted with id=${id}`
         })
     })
 }

@@ -34,16 +34,16 @@ const save = (newData, callback) => {
     let sqlQuery = 'INSERT INTO users SET ?'
     db.query(sqlQuery, { name: newData.name, email: newData.email, password: newData.password }, (error, user) => {
         if(error) throw error
-        callback(user)
+        callback()
     })
 }
 
 //update a user
 const updateById = (updatedData, userId, callback) => {
-    let sqlQuery = `UPDATE users SET name=${updatedData.name}, email=${updatedData.email}, password=${updatedData.password} WHERE id=${userId}`
+    let sqlQuery = `UPDATE users SET name='${updatedData.name}', email='${updatedData.email}', password='${updatedData.password}' WHERE id=${userId}`
     db.query(sqlQuery, (error, user) => {
         if(error) throw error
-        callback(user)
+        callback()
     })
 }
 
