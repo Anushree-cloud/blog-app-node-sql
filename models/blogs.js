@@ -47,17 +47,8 @@ const getAllByCatagory = (catId, callback) => {
     })
 }
 
-//get all blogs of a particular category and particular user
-const getAllByCatagoryAndUser = (catId, userId, callback) => {
-    let sqlQuery = `SELECT * FROM blogs WHERE category_id=${catId} AND user_id=${userId}`
-    db.query(sqlQuery, (error, blogs) => {
-        if(error) throw error
-        callback(blogs)
-    })
-}
-
 //blog details with user user details and category (inner join)
-const getBlogDetailsWithUser = (callback) => {
+const getBlogDetails = (callback) => {
     let sqlQuery = `SELECT 
     blog_categories.id as category_id, 
     blog_categories.name as category_name, 
@@ -70,6 +61,7 @@ const getBlogDetailsWithUser = (callback) => {
     FROM blogs
     INNER JOIN users ON blogs.user_id = users.id
     INNER JOIN blogs.category_id = blog_categories.id `
+
     db.query(sqlQuery, (error, details) => {
         if(error) throw error
         callback(details)
@@ -79,7 +71,7 @@ const getBlogDetailsWithUser = (callback) => {
 //add a new blog
 const save = (data, callback) => {
     let sqlQuery = 'INSERT INTO blogs SET ?'
-    db.query(sqlQuery, { title: data.title, description: data.description, category_id: data.category_id, user_id: data.userId }, (error, blog) => {
+    db.query(sqlQuery, { title: data.title, description: data.description, category_id: data.category_id, user_id: data.user_id }, (error, blog) => {
         if(error) throw error
         callback(blog)
     })
@@ -90,13 +82,13 @@ const updateById = (data, blogId, callback) => {
     let sqlQuery = `UPDATE blogs SET title='${data.title}', description='${data.description}' WHERE id=${blogId}`
     db.query(sqlQuery, (error, blog) => {
         if(error) throw error
-        callback(blog)
+        callback()
     })
 }
 
 //remove a blog
 const deleteById = (blogId, callback) => {
-    let sqlQuery = `DELETE blogs WHERE id=${blogId}`
+    let sqlQuery = `DELETE FROM blogs WHERE id=${blogId}`
     db.query(sqlQuery, (error) => {
         if(error) throw error
         callback()
@@ -104,5 +96,5 @@ const deleteById = (blogId, callback) => {
 }
 
 module.exports = {
-    getAll, getAllByCatagory, getAllByCatagoryAndUser, getAllByUser, getSingleById, getBlogDetailsWithUser, save, updateById, deleteById
+    getAll, getAllByCatagory, getAllByUser, getSingleById, getBlogDetails, save, updateById, deleteById
 }
